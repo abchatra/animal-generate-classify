@@ -288,6 +288,7 @@ f b b b 1 1 b 1 b f f f 1 f
         . . . 1 1 1 1 1 1 1 1 1 1 . . .
     `
 
+    let basetArray: Sprite[] = [];
 
     let initialized = false;
     //% block
@@ -375,7 +376,7 @@ f b b b 1 1 b 1 b f f f 1 f
     function classifyInternal(sprite: Sprite) {
         if (updateHandler) {
             updateHandler(sprite);
-            let animalBasket = sprites.allOfKind(sprites.readDataNumber(sprite, "animal") * 100 + 500)[0];
+            let animalBasket = basetArray[sprites.readDataNumber(sprite, "animal")];
             sprite.follow(animalBasket);
         }
     }
@@ -390,18 +391,18 @@ f b b b 1 1 b 1 b f f f 1 f
         for (let i = 0; i < 6; i++) {
             let basket = sprites.create(basketImage, SpriteKind.basket); // temp using boxImage
             basket.setPosition(prevPos, 100);
-            basket.setKind(i*100 + 500);
             sprites.setDataNumber(basket, "kind", i)
             prevPos += betweenPos + basketImage.width;
+            basetArray[i] = basket;
         }
         sprites.onOverlap(SpriteKind.animal, SpriteKind.basket, function (sprite, otherSprite) {
             if (sprites.readDataNumber(sprite, "kind") != sprites.readDataNumber(otherSprite, "kind")){
-                sprite.destroy()
+                sprite.destroy(effects.fire, 500)
                 info.changeScoreBy(-1)
             } else {
                 info.changeScoreBy(1)
+                sprite.destroy(effects.confetti, 500)
             }
-
         })
         sprites.onOverlap(SpriteKind.animal, SpriteKind.box, function (sprite, otherSprite) {
             classifyInternal(sprite);
@@ -414,7 +415,7 @@ f b b b 1 1 b 1 b f f f 1 f
         animal.onClassifyUpdate(function (mySprite) {
             if (animal.detect(animal.animalProperties.HasTwoLegs, mySprite)) {
                 if (animal.detect(animal.animalProperties.HasFeathers, mySprite)) {
-                    animal.classify(mySprite, animal.kind.Pigeon)
+                    animal.classify(mySprite, animal.kind.Kangaroo)
                 } else {
                     animal.classify(mySprite, animal.kind.Kangaroo)
                 }
