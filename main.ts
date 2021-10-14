@@ -205,6 +205,13 @@ namespace animal {
         anim.x = 80
         anim.y = 0
         anim.vy = 20
+        switch(kind) {
+            case animal.kind.Fish: sprites.setDataBoolean(anim, "water", true); break;
+            case animal.kind.Dog: sprites.setDataBoolean(anim, "water", false); break;
+        }        
+        //    sprites.changeDataNumberBy(anim, "legs", 4)
+        //     sprites.setDataString(anim, "", "")
+
         return anim
     }
 
