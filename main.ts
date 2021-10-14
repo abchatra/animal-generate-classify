@@ -339,6 +339,8 @@ namespace animal {
     function classifyInternal(sprite: Sprite) {
         if (updateHandler) {
             updateHandler(sprite);
+            let animalBasket = sprites.allOfKind(sprites.readDataNumber(sprite, "animal") * 100 + 500)[0];
+            sprite.follow(animalBasket);
         }
     }
 
@@ -352,11 +354,12 @@ namespace animal {
         for (let i = 0; i < 6; i++) {
             let basket = sprites.create(basketImage, SpriteKind.basket); // temp using boxImage
             basket.setPosition(prevPos, 100);
+            basket.setKind(i*100 + 500);
             prevPos += betweenPos + basketImage.width;
         }
        
         sprites.onOverlap(SpriteKind.animal, SpriteKind.box, function (sprite, otherSprite) {
-            classifyInternal(sprite)
+            classifyInternal(sprite);
         })
     }
     init();
