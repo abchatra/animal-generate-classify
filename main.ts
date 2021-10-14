@@ -276,15 +276,15 @@ namespace animal {
     }
 
     
-    //% block
+    //% block="generate random animals"
     export function generate(): void {
         game.onUpdateInterval(5000, function () {
             spawnAnimal(Math.randomRange(0, animalImage.length - 1));
         })
     }
-    //% block="on classify $sprite"
+    //% block="on classify $mySprite"
     //% draggableParameters="reporter"
-    export function onClassifyUpdate(handler: (sprite: Sprite) => void) {
+    export function onClassifyUpdate(handler: (mySprite: Sprite) => void) {
         updateHandler = handler;
     }
 
