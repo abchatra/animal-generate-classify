@@ -1,13 +1,13 @@
 /**
  * Custom blocks
  */
-//% weight=100 color=#0fbc11 icon=""
 namespace SpriteKind {
     export const animal = SpriteKind.create()
     export const box = SpriteKind.create()
     export const basket = SpriteKind.create();
 }
 
+//% weight=100 color=#0fbc11 icon=""
 namespace animal {
     export enum kind {
         //% block="Fish"
@@ -86,14 +86,14 @@ namespace animal {
         . . . 4 f 4 4 . . . . . . . . .
         . f 4 4 4 4 4 4 4 . . . . . . .
         . . 4 4 4 4 4 4 4 4 4 . . . . .
-        . . . . 4 e e e 4 4 4 4 4 . . .
-        . . . . 4 e 4 e 4 4 4 4 4 . . .
-        . . . 4 4 e e 4 4 e 4 4 4 . . .
-        . . . 4 . . . e e e 4 4 4 4 . .
-        . . . . . . . . . 4 4 4 4 4 4 .
-        . . . . . . . . . . 4 . . . 4 .
-        . . . . . . . 4 4 4 4 . . . 4 4
-        . . . . . . . 4 4 4 4 . . . . 4
+        . . . . 4 4 4 4 4 4 4 4 4 . . .
+        . . . . 4 . 4 4 4 4 4 4 4 4 . .
+        . . . 4 4 . . 4 4 4 4 4 4 4 . .
+        . . . 4 . . . . 4 4 4 4 4 4 . .
+        . . . . . . . . . . 4 4 4 4 . .
+        . . . . . . . . . . 4 . . 4 . .
+        . . . . . . . . . . 4 . . 4 . .
+        . . . . . . . 4 4 4 4 . . 4 4 4
         . . . . . . . . . . . . . . . .
     `
     ]
@@ -371,5 +371,5 @@ namespace animal {
         }
     }
     //comment out
-    //test()
+//    test()
 }
