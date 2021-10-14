@@ -253,7 +253,8 @@ namespace animal {
 
         return anim
     }
-    //%block 
+
+    //% block="detect property $property $sprite"
     export function detect(property: animal.animalProperties, sprite: Sprite) : boolean {
         switch(property) {
             case animalProperties.HasTwoLegs: return sprites.readDataBoolean(sprite, "HasTwoLegs")
@@ -271,7 +272,8 @@ namespace animal {
             spawnAnimal(Math.randomRange(0, animalImage.length - 1));
         })
     }
-    //% block
+    //% block="on classify $sprite"
+    //% draggableParameters="reporter"
     export function onClassifyUpdate(handler: (sprite: Sprite) => void) {
         updateHandler = handler;
     }
