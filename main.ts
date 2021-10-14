@@ -274,14 +274,12 @@ namespace animal {
     export function classify(mySprite: Sprite, kind: animal.kind) {
         sprites.setDataNumber(mySprite, "animal", kind);
     }
-
     
-    //% block="generate random animals"
+    //% block="generate random animal"
     export function generate(): void {
-        game.onUpdateInterval(5000, function () {
-            spawnAnimal(Math.randomRange(0, animalImage.length - 1));
-        })
+        spawnAnimal(Math.randomRange(0, animalImage.length - 1));
     }
+
     //% block="on classify $mySprite"
     //% draggableParameters="reporter"
     export function onClassifyUpdate(handler: (mySprite: Sprite) => void) {
@@ -301,7 +299,6 @@ namespace animal {
         sprites.onOverlap(SpriteKind.animal, SpriteKind.box, function (sprite, otherSprite) {
             classifyInternal(sprite)
         })
-   
     }
     init();
 
