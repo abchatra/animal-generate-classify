@@ -5,6 +5,7 @@
 namespace SpriteKind {
     export const animal = SpriteKind.create()
     export const box = SpriteKind.create()
+    export const basket = SpriteKind.create();
 }
 
 namespace animal {
@@ -296,6 +297,15 @@ namespace animal {
         scene.setBackgroundImage(backgroundImage)
         let box = sprites.create(boxImage, SpriteKind.box)
         box.setPosition(80,30)
+        
+        let betweenPos = (scene.screenWidth() - (boxImage.width * 6)) / 7
+        let prevPos = betweenPos*2;
+        for (let i = 0; i < 6; i++) {
+            let basket = sprites.create(boxImage, SpriteKind.basket); // temp using boxImage
+            basket.setPosition(prevPos, 100);
+            prevPos += betweenPos + boxImage.width;
+        }
+       
         sprites.onOverlap(SpriteKind.animal, SpriteKind.box, function (sprite, otherSprite) {
             classifyInternal(sprite)
         })
