@@ -8,7 +8,7 @@ namespace SpriteKind {
 }
 
 namespace animal {
-    export enum type {
+    export enum kind {
         //% block="Fish"
         Fish,
         //% block="Dog"
@@ -196,16 +196,22 @@ namespace animal {
     2 . . . . . . . . . . . . . . 2 
     2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
     `
+    let initialized = false;
     //% block
     let updateHandler: (sprite: Sprite) => void;
+
+    function spawnAnimal(kind:number) {
+        let anim = sprites.create(animalImage[kind], SpriteKind.animal)
+        anim.x = 80
+        anim.y = 0
+        anim.vy = 20
+        return anim
+    }
 
     //% block
     export function generate(): void {
         game.onUpdateInterval(5000, function () {
-            let anim = sprites.create(animalImage[Math.randomRange(0, animalImage.length - 1)], SpriteKind.animal)
-            anim.x = 80
-            anim.y = 0
-            anim.vy = 20
+            spawnAnimal(Math.randomRange(0, animalImage.length - 1));
         })
     }
     //% block
@@ -226,9 +232,11 @@ namespace animal {
         sprites.onOverlap(SpriteKind.animal, SpriteKind.box, function (sprite, otherSprite) {
             classify(sprite)
         })
+   
     }
+    init();
+
     function test() {
-        init()
         generate()
     }
     //comment out
