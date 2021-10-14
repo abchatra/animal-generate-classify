@@ -95,6 +95,36 @@ namespace animal {
         . . . . . . . . . . 4 . . 4 . .
         . . . . . . . 4 4 4 4 . . 4 4 4
         . . . . . . . . . . . . . . . .
+    `, img`
+. . . . f f f f . . . . . .
+. . f f c c c f f . . . . .
+. f 1 1 c c c f f f . . . .
+. . f d c c f 3 1 f . . . .
+. . f 1 1 1 1 3 1 f . . . .
+. f 1 1 1 f 1 1 f c f b f b
+f b b 1 1 1 1 1 f c f f b f
+f b f b 1 1 1 f f f . f b f
+f b b b 1 1 b 1 b f f f 1 f
+. f f f f 1 b 1 b 1 b 1 b f
+. . . f d 1 1 1 b 1 b 1 f .
+. . . f 1 1 1 1 1 d 1 1 f .
+. . . f 1 f f f 1 f f 1 f .
+. . . f f . . f f . . f f .
+    `, img`
+        . . . . . e e . . . . e e .
+        . . . . c 4 4 c . . c 4 4 c
+        . . . . c 2 4 4 f f 4 4 2 c
+        . . . . f 2 d 4 4 4 4 d 2 f
+        . . . . e 4 4 4 4 4 4 4 4 e
+        . . . . e 4 f 4 4 4 4 f 4 e
+        e f e . f c 4 f 4 4 f 4 c f
+        f c f . f 4 4 4 e e 4 4 2 f
+        f 4 f . f c c 4 1 1 4 c f .
+        f c f f c 2 4 1 1 1 1 4 f .
+        f 2 c 2 c 4 4 1 1 1 1 c f .
+        . f f f 4 4 2 4 1 1 4 4 f .
+        . . . f 4 f f 4 f f f c f .
+        . . . f f . . f f . . f f .
     `
     ]
 
