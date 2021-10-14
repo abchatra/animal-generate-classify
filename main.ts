@@ -302,30 +302,36 @@ f b b b 1 1 b 1 b f f f 1 f
             case animal.kind.Pigeon:
                 sprites.setDataBoolean(anim, "HasTwoLegs", true);
                 sprites.setDataBoolean(anim, "HasFeathers", true);
+                sprites.setDataNumber(anim, "kind", animal.kind.Pigeon)
                 break;
             case animal.kind.Kangaroo:
                 sprites.setDataBoolean(anim, "HasTwoLegs", true);
                 sprites.setDataBoolean(anim, "HasFeathers", false);
+                sprites.setDataNumber(anim, "kind", animal.kind.Kangaroo)
                 break;
             case animal.kind.Zebra:
                 sprites.setDataBoolean(anim, "HasTwoLegs", false);
                 sprites.setDataBoolean(anim, "HasStripes", true);
                 sprites.setDataBoolean(anim, "IsAHerbivore", true);
+                sprites.setDataNumber(anim, "kind", animal.kind.Zebra)
                 break;
             case animal.kind.Tiger:
                 sprites.setDataBoolean(anim, "HasTwoLegs", false);
                 sprites.setDataBoolean(anim, "HasStripes", true);
                 sprites.setDataBoolean(anim, "IsAHerbivore", false);
+                sprites.setDataNumber(anim, "kind", animal.kind.Tiger)
                 break;
             case animal.kind.Fish:
                 sprites.setDataBoolean(anim, "HasTwoLegs", false);
                 sprites.setDataBoolean(anim, "HasStripes", false);
                 sprites.setDataBoolean(anim, "DoesLiveInWater", true);
+                sprites.setDataNumber(anim, "kind", animal.kind.Fish)
                 break;
             case animal.kind.Dog:
                 sprites.setDataBoolean(anim, "HasTwoLegs", false);
                 sprites.setDataBoolean(anim, "HasStripes", false);
                 sprites.setDataBoolean(anim, "DoesLiveInWater", false);
+                sprites.setDataNumber(anim, "kind", animal.kind.Dog)
                 break;
         }        
         //    sprites.setDataNumber(anim, "legs", 4)
@@ -385,21 +391,52 @@ f b b b 1 1 b 1 b f f f 1 f
             let basket = sprites.create(basketImage, SpriteKind.basket); // temp using boxImage
             basket.setPosition(prevPos, 100);
             basket.setKind(i*100 + 500);
+            sprites.setDataNumber(basket, "kind", i)
             prevPos += betweenPos + basketImage.width;
         }
-       
+        sprites.onOverlap(SpriteKind.animal, SpriteKind.basket, function (sprite, otherSprite) {
+            if (sprites.readDataNumber(sprite, "kind") != sprites.readDataNumber(otherSprite, "kind")){
+                sprite.destroy()
+                info.changeScoreBy(-1)
+            } else {
+                info.changeScoreBy(1)
+            }
+
+        })
         sprites.onOverlap(SpriteKind.animal, SpriteKind.box, function (sprite, otherSprite) {
             classifyInternal(sprite);
         })
+
     }
     init();
 
     function test() {
+        animal.onClassifyUpdate(function (mySprite) {
+            if (animal.detect(animal.animalProperties.HasTwoLegs, mySprite)) {
+                if (animal.detect(animal.animalProperties.HasFeathers, mySprite)) {
+                    animal.classify(mySprite, animal.kind.Pigeon)
+                } else {
+                    animal.classify(mySprite, animal.kind.Kangaroo)
+                }
+            } else {
+                if (animal.detect(animal.animalProperties.HasStripes, mySprite)) {
+                    if (animal.detect(animal.animalProperties.IsAHerbivore, mySprite)) {
+                        animal.classify(mySprite, animal.kind.Zebra)
+                    } else {
+                        animal.classify(mySprite, animal.kind.Tiger)
+                    }
+                } else if (animal.detect(animal.animalProperties.DoesLiveInWater, mySprite)) {
+                    animal.classify(mySprite, animal.kind.Fish)
+                } else {
+                    animal.classify(mySprite, animal.kind.Dog)
+                }
+            }
+        })
         for (let i = 0 ; i < 100; i++) {
-            pause(500)
+            pause(2000)
             generate()
         }
     }
     //comment out
-//    test()
+    //test()
 }
