@@ -210,6 +210,27 @@ namespace animal {
     2 . . . . . . . . . . . . . . 2 
     2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
     `
+
+    let basketImage = img`
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        1 . . . . . . . . . . . . . . 1
+        f e e . . . . . . . . . . e e f
+        1 f e e . . . . . . . . e e f 1
+        1 1 f e e e e e e e e e e f 1 1
+        . 1 e f e e e e e e e e f e 1 .
+        . 1 e f e e e e e e e e f e 1 .
+        . 1 e e f f e e e e f f e e 1 .
+        . 1 e e e e f f f f e e e e 1 .
+        . 1 1 e e e e e e e e e e 1 1 .
+        . . 1 e e e e e e e e e e 1 . .
+        . . 1 e e e e e e e e e e 1 . .
+        . . 1 1 e e e e e e e e 1 1 . .
+        . . . 1 e e e e e e e e 1 . . .
+        . . . 1 1 1 1 1 1 1 1 1 1 . . .
+    `
+
+
     let initialized = false;
     //% block
     let updateHandler: (sprite: Sprite) => void;
@@ -298,12 +319,12 @@ namespace animal {
         let box = sprites.create(boxImage, SpriteKind.box)
         box.setPosition(80,30)
         
-        let betweenPos = (scene.screenWidth() - (boxImage.width * 6)) / 7
+        let betweenPos = (scene.screenWidth() - (basketImage.width * 6)) / 7
         let prevPos = betweenPos*2;
         for (let i = 0; i < 6; i++) {
-            let basket = sprites.create(boxImage, SpriteKind.basket); // temp using boxImage
+            let basket = sprites.create(basketImage, SpriteKind.basket); // temp using boxImage
             basket.setPosition(prevPos, 100);
-            prevPos += betweenPos + boxImage.width;
+            prevPos += betweenPos + basketImage.width;
         }
        
         sprites.onOverlap(SpriteKind.animal, SpriteKind.box, function (sprite, otherSprite) {
