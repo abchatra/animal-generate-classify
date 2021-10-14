@@ -232,5 +232,5 @@ namespace animal {
         generate()
     }
     //comment out
-    test()
+    //test()
 }
