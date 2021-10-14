@@ -23,6 +23,19 @@ namespace animal {
         Tiger,
     }
 
+    export enum animalProperties {
+        //% block="HasTwoLegs"
+        HasTwoLegs,
+        //% block="HasStripes"
+        HasStripes,
+        //% block="IsAHerbivore"
+        IsAHerbivore,
+        //% block="DoesLiveInWater"
+        DoesLiveInWater,
+        //% block="HasFeathers"
+        HasFeathers,
+    }
+
     let animalImage = [img`
     . . . . . . . . . . . . . . . . 
     . . . . . . . . c c c c . . . . 
@@ -206,8 +219,34 @@ namespace animal {
         anim.y = 0
         anim.vy = 20
         switch(kind) {
-            case animal.kind.Fish: sprites.setDataBoolean(anim, "water", true); break;
-            case animal.kind.Dog: sprites.setDataBoolean(anim, "water", false); break;
+            case animal.kind.Pigeon:
+                sprites.setDataBoolean(anim, "HasTwoLegs", true);
+                sprites.setDataBoolean(anim, "HasFeathers", true);
+                break;
+            case animal.kind.Kangaroo:
+                sprites.setDataBoolean(anim, "HasTwoLegs", true);
+                sprites.setDataBoolean(anim, "HasFeathers", false);
+                break;
+            case animal.kind.Zebra:
+                sprites.setDataBoolean(anim, "HasTwoLegs", false);
+                sprites.setDataBoolean(anim, "HasStripes", true);
+                sprites.setDataBoolean(anim, "IsAHerbivore", true);
+                break;
+            case animal.kind.Tiger:
+                sprites.setDataBoolean(anim, "HasTwoLegs", false);
+                sprites.setDataBoolean(anim, "HasStripes", true);
+                sprites.setDataBoolean(anim, "IsAHerbivore", false);
+                break;
+            case animal.kind.Fish:
+                sprites.setDataBoolean(anim, "HasTwoLegs", false);
+                sprites.setDataBoolean(anim, "HasStripes", false);
+                sprites.setDataBoolean(anim, "DoesLiveInWater", true);
+                break;
+            case animal.kind.Dog:
+                sprites.setDataBoolean(anim, "HasTwoLegs", false);
+                sprites.setDataBoolean(anim, "HasStripes", false);
+                sprites.setDataBoolean(anim, "DoesLiveInWater", false);
+                break;
         }        
         //    sprites.changeDataNumberBy(anim, "legs", 4)
         //     sprites.setDataString(anim, "", "")
@@ -247,5 +286,5 @@ namespace animal {
         generate()
     }
     //comment out
-    //test()
+    test()
 }
