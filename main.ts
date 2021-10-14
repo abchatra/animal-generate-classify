@@ -254,17 +254,27 @@ namespace animal {
         return anim
     }
 
-    //% block="detect property $property $sprite"
-    export function detect(property: animal.animalProperties, sprite: Sprite) : boolean {
+    //% block="detect property $property $mySprite"
+    //% mySprite.defl=mySprite
+    //% mySprite.shadow=variables_get
+    export function detect(property: animal.animalProperties, mySprite: Sprite) : boolean {
         switch(property) {
-            case animalProperties.HasTwoLegs: return sprites.readDataBoolean(sprite, "HasTwoLegs")
-            case animalProperties.HasStripes: return sprites.readDataBoolean(sprite, "HasStripes")
-            case animalProperties.IsAHerbivore: return sprites.readDataBoolean(sprite, "IsAHerbivore")
-            case animalProperties.DoesLiveInWater: return sprites.readDataBoolean(sprite, "DoesLiveInWater")
-            case animalProperties.HasFeathers: return sprites.readDataBoolean(sprite, "HasFeathers")
+            case animalProperties.HasTwoLegs: return sprites.readDataBoolean(mySprite, "HasTwoLegs")
+            case animalProperties.HasStripes: return sprites.readDataBoolean(mySprite, "HasStripes")
+            case animalProperties.IsAHerbivore: return sprites.readDataBoolean(mySprite, "IsAHerbivore")
+            case animalProperties.DoesLiveInWater: return sprites.readDataBoolean(mySprite, "DoesLiveInWater")
+            case animalProperties.HasFeathers: return sprites.readDataBoolean(mySprite, "HasFeathers")
         }
         return false;
     }
+
+    //% block="classify $mySprite as $kind"
+    //% mySprite.defl=mySprite
+    //% mySprite.shadow=variables_get
+    export function classify(mySprite: Sprite, kind: animal.kind) {
+        sprites.setDataNumber(mySprite, "animal", kind);
+    }
+
     
     //% block
     export function generate(): void {
@@ -278,7 +288,7 @@ namespace animal {
         updateHandler = handler;
     }
 
-    function classify(sprite: Sprite) {
+    function classifyInternal(sprite: Sprite) {
         if (updateHandler) {
             updateHandler(sprite);
         }
@@ -289,7 +299,7 @@ namespace animal {
         let box = sprites.create(boxImage, SpriteKind.box)
         box.setPosition(80,30)
         sprites.onOverlap(SpriteKind.animal, SpriteKind.box, function (sprite, otherSprite) {
-            classify(sprite)
+            classifyInternal(sprite)
         })
    
     }
