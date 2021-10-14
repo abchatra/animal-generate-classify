@@ -248,12 +248,23 @@ namespace animal {
                 sprites.setDataBoolean(anim, "DoesLiveInWater", false);
                 break;
         }        
-        //    sprites.changeDataNumberBy(anim, "legs", 4)
-        //     sprites.setDataString(anim, "", "")
+        //    sprites.setDataNumber(anim, "legs", 4)
+        //    sprites.setDataString(anim, "", "")
 
         return anim
     }
-
+    //%block 
+    export function detect(property: animal.animalProperties, sprite: Sprite) : boolean {
+        switch(property) {
+            case animalProperties.HasTwoLegs: return sprites.readDataBoolean(sprite, "HasTwoLegs")
+            case animalProperties.HasStripes: return sprites.readDataBoolean(sprite, "HasStripes")
+            case animalProperties.IsAHerbivore: return sprites.readDataBoolean(sprite, "IsAHerbivore")
+            case animalProperties.DoesLiveInWater: return sprites.readDataBoolean(sprite, "DoesLiveInWater")
+            case animalProperties.HasFeathers: return sprites.readDataBoolean(sprite, "HasFeathers")
+        }
+        return false;
+    }
+    
     //% block
     export function generate(): void {
         game.onUpdateInterval(5000, function () {
@@ -269,7 +280,7 @@ namespace animal {
         if (updateHandler) {
             updateHandler(sprite);
         }
-   }
+    }
 
     function init() {
         scene.setBackgroundImage(backgroundImage)
